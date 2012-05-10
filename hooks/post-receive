@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ -f auto_checkout ] || exit 0
+
+# Kludge to read the last ref
+while read old new ref; do
+    real_sha=$new
+done
+
+export GIT_WORK_TREE=$PWD/../
+git checkout -f $real_sha

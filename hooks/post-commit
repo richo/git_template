@@ -1,0 +1,14 @@
+#!/bin/sh
+.git/hooks/ctags >/dev/null 2>&1 &
+
+[ -n "$richo_git_rewrite" ] && exit 0
+export richo_git_rewrite=YES
+if which at_work >/dev/null; then
+    if at_work; then
+        n=0
+        user=`git config --get user.work.name`; n=$(( $n + $? ))
+        email=`git config --get user.work.email`; n=$(( $n + $? ))
+        [ $n -eq 0 ] &&
+            git commit --amend --author "$user <$email>" -C HEAD
+    fi
+fi
