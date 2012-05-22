@@ -8,4 +8,5 @@ while read old new ref; do
 done
 
 export GIT_WORK_TREE=$PWD/../
-git checkout -f $real_sha
+git checkout -qf $real_sha &&
+    echo "Checked out $real_sha"
