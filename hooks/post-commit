@@ -1,4 +1,8 @@
 #!/bin/sh
 .git/hooks/ctags >/dev/null 2>&1 &
 
+if [ -f ".git/geotag_commits" ] && which whereami >/dev/null; then
+    echo "Tagging commit.."
+    rev=`git rev-parse HEAD`
+    git notes append -m"richo_geotag: `whereami`"
 fi
