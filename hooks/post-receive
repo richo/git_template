@@ -1,6 +1,10 @@
 #!/bin/sh
 
-[ -f auto_checkout ] || exit 0
+should_auto_checkout() {
+    [ -f "auto_checkout" ]
+}
+
+should_auto_checkout || exit 0
 
 # Kludge to read the last ref
 while read old new ref; do
