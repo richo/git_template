@@ -1,4 +1,7 @@
 #!/bin/sh
 rm -f .git/tags
+mkdir .git/tags_lock 2>/dev/null || exit 0
+trap "rmdir .git/tags_lock" EXIT
+
 ctags --tag-relative -R -f .git/tags --exclude=.git --languages=-sql
 # -javascript
