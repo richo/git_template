@@ -10,7 +10,7 @@ tag_file() {
 }
 
 should_geotag_commits() {
-    [ -f ".git/geotag_commits" ] || git config --get geotag.enabled
+    [ -f ".git/geotag_commits" ] || git config --get geotag.enabled >/dev/null
 }
 
 can_geotag_commits() {
