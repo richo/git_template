@@ -3,6 +3,9 @@
 should_auto_checkout() {
     [ -f "auto_checkout" ]
 }
+should_run_auto_checkout() {
+    [ -x "auto_checkout" ]
+}
 
 should_auto_checkout || exit 0
 
@@ -14,3 +17,9 @@ done
 export GIT_WORK_TREE=$PWD/../
 git checkout -qf $real_sha &&
     echo "Checked out $real_sha"
+
+if should_run_auto_checkout; then
+    # Explicitly don't exec the script. It's exist status is irrelevant because
+    # it's way too late to back out now
+    ./auto_checkout
+fi
